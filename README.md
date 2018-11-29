@@ -85,6 +85,97 @@ Would you like to install them now with npm?
 
 _NOTA: Ao retornarmos para um arquivo .js notaremos que os erros na nossa styleguide são marcados com linhas vermelhas (Isso depois de instalada a extenção do ESLint_
 
+## SEQUELIZE
+
+Ferramenta ORM que suporte PostgreSQL, MySQL, SQLite e M\$SQL.
+
+Para saber mais: http://docs.sequelizejs.com
+
+```bash
+yarn add sequelize
+
+yarn add -D sequelize-cli
+```
+
+_NOTA: O sequelize_cli serve para termos acesso à uma linha de comando no terminal para facilitar a criação de tabelas, models, etc..._
+
+#### Iniciando o sequelize:
+
+```bash
+npx sequelize init
+```
+
+- Após rodar o comando 'npx' mover a pasta **'/config'**, que ele gerou na raiz para **'/src'**
+- Renomear o arquivo **'/config/config.json'** para **'/config/database.js'**
+- Criar a pasta: **'/src/database'** e mover a as pastas **'/migrations'** e **'/seeders'** para dentro dela.
+- Mover a pasta **'/models'** para **'/src/app'**
+- Criar o seguinte arquivo na raiz do projeto: **.sequelizer**
+  - _Serve para indicar ao sequelizer que alteramos de lugar algumas pastas que ele criou(vide passos acima)_
+
+**CONTEÚDO DO ARQUIVO .sequelizerc:**
+
+```javascript
+const path = requie('path)
+
+module.exports = {
+  config: path.resolve('src', 'config', 'database.js'),
+  'models-path': path.resolve('src', 'app', 'models'),
+  'seeders-path': path.resolve('src', 'database', 'seeders'),
+  'migrations-path': path.resolve('src', 'database', 'migrations'),
+}
+```
+
+_NOTA IMPORTANTE: Consultar a documentação para ver qual dependência deve ser instalada de acordo com o banco de dados que será trabalhado. No caso desses estudos, o banco escolhido pelo professor foi o Postgres. Para este banco devemos instalar a extenção pg: **yarn add pg**_
+
+#### Configuração do sequelize (/src/config/database.js)
+
+```javascript
+module.exports = {
+  dialect: "postgres",
+  host: "127.0.0.1",
+  username: "docker",
+  password: "docker",
+  database: "gonodemodulo2",
+  operatorAliases: false,
+  define: {
+    timestamps: true,
+    underscored: true,
+    underscoredAll: true
+  }
+};
+```
+
+#### Adequação do '/src/app/models/index.js':
+
+- Remover a linha: **const env = process.env.NODE_ENV || 'development';** não temos mais essa configuração no nosso **database.js**
+- Alterar o caminho do nosso config de **const config = require(\_\_dirname + '/../config/config.json')[env]** para **const config = require('../../config/database.js')**
+- Passar **let sequelize** para constante: **const sequelize**
+- Trocar:
+
+```javascript
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+} else {
+  sequelize = new Sequelize(
+    config.database,
+    config.username,
+    config.password,
+    config
+  );
+}
+```
+
+- Por:
+
+```javascript
+const sequelize = new Sequelize(
+  config.database,
+  config.username,
+  config.password,
+  config
+);
+```
+
 # Extenções VSCODE utilizadas
 
 ## Nunjucks
@@ -132,3 +223,27 @@ _Com isso, toda vez que salvarmos um arquivo ele formatará seguindo o styleguid
 A VS Code plugin for prettier/prettier. (Esben Petersen)
 
 Automatiza algumas formatações do ESLINT
+
+# Banco de dados
+
+## POSTGRES
+
+_Resolvi ir pelo mesmo caminho do professor, depois que tiver caminhando sozinho experimento outros_ :wink:
+
+### Instalar o Docker
+
+_O Docker é uma aplicação que torna simples e fácil executar processos de aplicação em um contêiner, que é como uma máquina virtual, apenas mais portátil, mais amigável, e mais dependente do sistema operacional do host._ [TUTORIAL INSTALAÇÃO DOCKER](https://www.digitalocean.com/community/tutorials/como-instalar-e-usar-o-docker-no-ubuntu-16-04-pt)
+
+Depois, rodar o comando:
+
+```bash
+sudo docker run --name database -p 5432:5432 -d -t kartoza/postgis
+```
+
+_NOTA: o '-p 5432:5432' serve para redirecionar a porta 5432 do docker container para a posta 5432 da nossa máquina. Assim podemos acessar o banco por essa porta_
+
+- Depois de instalado podemos roadar o seguinte comando para ver os servidores que estão rodando:
+
+```bash
+sudo docker ps
+```

@@ -29,6 +29,9 @@ class App {
       autoescape: true
     })
 
+    // NOTA_ESTUDO: Serve para dizer ao express que ele deve 'servir' arquivos públicos além das rotas:
+    this.express.use(express.static(path.resolve(__dirname, 'public')))
+
     this.express.set('view engine', 'njk')
   }
 
