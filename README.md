@@ -176,6 +176,36 @@ const sequelize = new Sequelize(
 );
 ```
 
+## BCRYPTJS
+
+Serve para fazer criptografia.
+
+Para saber mais: https://www.npmjs.com/package/bcryptjs
+
+```bash
+yarn add bcryptjs
+```
+
+_NOTA: Um exemplo de uso pode ser encontrado no MODEL USER_
+
+## MULTER
+
+Para lidar com a parte de uploads da nossa aplicação.
+
+Para saber mais: https://www.npmjs.com/package/multer
+
+```bash
+yarn add multer
+```
+
+- Criar arquivo: **'src/config/multer.js'**
+
+```javascript
+module.exports = {};
+```
+
+- Importar o arquivo de configurações do multer no nosso routes.js
+
 # Extenções VSCODE utilizadas
 
 ## Nunjucks
@@ -246,4 +276,24 @@ _NOTA: o '-p 5432:5432' serve para redirecionar a porta 5432 do docker container
 
 ```bash
 sudo docker ps
+```
+
+# MIGRATIONS
+
+A Migration serve, basicamente, para fazermos o controle de versão da nossa base de dados.
+
+## Para criar uma migration:
+
+- Gerar o arquivo de configuração:
+
+**EXEMPLO:**
+
+```bash
+npx sequelize migration:create --name=create-users
+```
+
+- Rodar a migration criada:
+
+```bash
+npx sequelize db:migrate
 ```
