@@ -2,6 +2,7 @@ const express = require('express')
 const session = require('express-session')
 const FileStore = require('session-file-store')(session)
 const nunjucks = require('nunjucks')
+const flash = require('connect-flash')
 
 // NOTA_ESTUDO: Essa biblioteca vem junto com o node e serve para lidarmos com caminhos do servidor.
 const path = require('path')
@@ -21,6 +22,9 @@ class App {
   middlewares () {
     // Utilizado para aceitar requisições de formulários
     this.express.use(express.urlencoded({ extended: false }))
+
+    // Utilizado para enviar mensagens através da seção
+    this.express.use(flash())
 
     // Utilizado para gerenciar seções
     this.express.use(

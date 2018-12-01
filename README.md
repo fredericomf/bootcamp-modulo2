@@ -234,6 +234,49 @@ yarn add session-file-store
 
 _NOTA_ESTUDO: O Session File Store está configurado da middleware de seção no arquivo server.js_
 
+## CONNECT FLASH
+
+Middleware para mensagens flash para Connect e Express
+
+Para saber mais: https://github.com/jaredhanson/connect-flash
+
+```bash
+yarn add connect-flash
+```
+
+_NOTA_ESTUDO: O Connect Flash está configurado no arquivo server.js_
+
+- Após configurar no server.js aplicar as mensagens nos Controllers que precisarmos (no nosso caso, até agora, foi no SessionController)
+
+- Temos que disponibilizar as variáveis flash para que o Nunjucks encontre, seguindo a mesma forma de disponibilizar o User 'res.local' :
+
+```javascript
+routes.use((req, res, next) => {
+  res.locals.flashSuccess = req.flash("success");
+  res.locals.flashError = req.flash("error");
+
+  return next();
+});
+```
+
+# PLUGINS
+
+## FLATPICKR
+
+Componente Datepicker
+
+Para saber mais: https://flatpickr.js.org
+
+Inserir o bloco abaixo no nosso HEAD (\_partials/head.njk):
+
+```html
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+```
+
 # Extenções VSCODE utilizadas
 
 ## Nunjucks
