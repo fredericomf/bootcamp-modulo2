@@ -1,4 +1,6 @@
 const express = require('express')
+const session = require('express-session')
+const FileStore = require('session-file-store')(session)
 const nunjucks = require('nunjucks')
 
 // NOTA_ESTUDO: Essa biblioteca vem junto com o node e serve para lidarmos com caminhos do servidor.
@@ -19,6 +21,19 @@ class App {
   middlewares () {
     // Utilizado para aceitar requisições de formulários
     this.express.use(express.urlencoded({ extended: false }))
+
+    // Utilizado para gerenciar seções
+    this.express.use(
+      session({
+        name: 'root',
+        secret: 'MyAppSecred', // NOTA_ESTUDO: SERVE PARA CRIPTOGRAFAR A NOSSA SESSION.
+        resave: true,
+        store: new FileStore({
+          path: path.resolve(__dirname, '..', 'tmp', 'sessions')
+        }),
+        saveUninitialized: true
+      })
+    )
   }
 
   views () {

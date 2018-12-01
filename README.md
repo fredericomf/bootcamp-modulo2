@@ -115,14 +115,14 @@ npx sequelize init
 **CONTEÚDO DO ARQUIVO .sequelizerc:**
 
 ```javascript
-const path = requie('path)
+const path = requie("path");
 
 module.exports = {
-  config: path.resolve('src', 'config', 'database.js'),
-  'models-path': path.resolve('src', 'app', 'models'),
-  'seeders-path': path.resolve('src', 'database', 'seeders'),
-  'migrations-path': path.resolve('src', 'database', 'migrations'),
-}
+  config: path.resolve("src", "config", "database.js"),
+  "models-path": path.resolve("src", "app", "models"),
+  "seeders-path": path.resolve("src", "database", "seeders"),
+  "migrations-path": path.resolve("src", "database", "migrations")
+};
 ```
 
 _NOTA IMPORTANTE: Consultar a documentação para ver qual dependência deve ser instalada de acordo com o banco de dados que será trabalhado. No caso desses estudos, o banco escolhido pelo professor foi o Postgres. Para este banco devemos instalar a extenção pg: **yarn add pg**_
@@ -205,6 +205,34 @@ module.exports = {};
 ```
 
 - Importar o arquivo de configurações do multer no nosso routes.js
+
+## EXPRESS SESSION
+
+Cria middleware de seções.
+
+Para saber mais: https://www.npmjs.com/package/express-session
+
+```bash
+yarn add express-session
+```
+
+_NOTA_ESTUDO: A middleware está configurada no arquivo server.js_
+
+_NOTA_ESTUDO2: Quando o servidor é reiniciado as seções são perdidas porque estão na memória. O professor recomendou utilizarmos o 'redis' para persistir as seções. Veja mais em: https://github.com/tj/connect-redis_
+
+_NOTA_ESTUDO3: Como estamos em uma aplicação de testes, usaremos o filestorage (guardar as seções em arquivos físicos_
+
+## SESSION FILE STORE
+
+Para salvar as seções em arquivos.
+
+Para saber mais: https://www.npmjs.com/package/session-file-store
+
+```bash
+yarn add session-file-store
+```
+
+_NOTA_ESTUDO: O Session File Store está configurado da middleware de seção no arquivo server.js_
 
 # Extenções VSCODE utilizadas
 

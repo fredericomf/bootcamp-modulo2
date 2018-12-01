@@ -25,5 +25,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   )
 
+  // NOTA_ESTUDO: Essa é uma forma de criar novas funções no MODEL (sequelize). Não pode ser Arrow Functions por utilizar o escopo da classe
+  User.prototype.checkPassword = function (password) {
+    return bcrypt.compare(password, this.password_hash)
+  }
+
   return User
 }
