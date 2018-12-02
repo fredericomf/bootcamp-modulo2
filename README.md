@@ -269,8 +269,6 @@ Para saber mais: https://momentjs.com/docs/
 yarn add moment
 ```
 
-_NOTA_ESTUDO: _
-
 # PLUGINS
 
 ## FLATPICKR
