@@ -7,8 +7,11 @@ module.exports = (sequelize, DataTypes) => {
 
   // NOTA_ESTUDO: Abaixo serve para fazermos relacionamentos entre entidades.
   Appointment.associate = models => {
-    Appointment.belongsTo(models.User, { foreingKey: 'user_id' }) // Usuário que agendou o serviço
-    Appointment.belongsTo(models.User, { foreingKey: 'provider_id' }) // Usuário que executará o serviço (barbeiro, cabeleireiro, manicure, etc...)
+    Appointment.belongsTo(models.User, { as: 'user', foreignKey: 'user_id' }) // Usuário que agendou o serviço
+    Appointment.belongsTo(models.User, {
+      as: 'provider',
+      foreignKey: 'provider_id'
+    }) // Usuário que executará o serviço (barbeiro, cabeleireiro, manicure, etc...)
   }
 
   return Appointment

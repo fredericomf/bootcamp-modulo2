@@ -259,6 +259,18 @@ routes.use((req, res, next) => {
 });
 ```
 
+## MOMENT
+
+Dependência para manipulação de datas
+
+Para saber mais: https://momentjs.com/docs/
+
+```bash
+yarn add moment
+```
+
+_NOTA_ESTUDO: _
+
 # PLUGINS
 
 ## FLATPICKR
