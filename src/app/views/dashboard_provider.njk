@@ -1,0 +1,23 @@
+{% extends "_layouts/default.njk" %}
+{# NOTA_ESTUDO: Para possibilitar o acesso ao usuário logado, o middleware implementa a variável local do escopo Nunjucks: res.locals.user #}
+{% block body %}
+  <div class="content">
+    <strong>Olá, {{user.name}}</strong>
+    <p>Esses são os seus agendamentos para hoje:</p>
+
+    <ul class="providers">
+    {% for appointment in appointments %}
+      <li class="provider">
+        <div>
+        Cliente: {{appointment.appointment.user.name}}
+        <br/>
+        Hora: {{appointment.formated_time}}
+        </div>
+      </li>
+    {% endfor %}
+    </ul>
+
+    <a href="/app/logout" class="logout">Sair</a>
+
+  </div>
+{% endblock %}
