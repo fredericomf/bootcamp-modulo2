@@ -115,7 +115,7 @@ npx sequelize init
 **CONTEÚDO DO ARQUIVO .sequelizerc:**
 
 ```javascript
-const path = requie("path");
+const path = require("path");
 
 module.exports = {
   config: path.resolve("src", "config", "database.js"),
