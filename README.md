@@ -109,7 +109,7 @@ npx sequelize init
 - Renomear o arquivo **'/config/config.json'** para **'/config/database.js'**
 - Criar a pasta: **'/src/database'** e mover a as pastas **'/migrations'** e **'/seeders'** para dentro dela.
 - Mover a pasta **'/models'** para **'/src/app'**
-- Criar o seguinte arquivo na raiz do projeto: **.sequelizer**
+- Criar o seguinte arquivo na raiz do projeto: **.sequelizerc**
   - _Serve para indicar ao sequelizer que alteramos de lugar algumas pastas que ele criou(vide passos acima)_
 
 **CONTEÚDO DO ARQUIVO .sequelizerc:**
