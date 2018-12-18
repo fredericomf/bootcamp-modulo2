@@ -373,6 +373,8 @@ A Migration serve, basicamente, para fazermos o controle de versão da nossa bas
 npx sequelize migration:create --name=create-users
 ```
 
+**É necessário implementar no arquivo da migration criada a SCHEMA da tabela. Vide exemplo na pasta migrations do projeto atual.**
+
 - Rodar a migration criada:
 
 ```bash
